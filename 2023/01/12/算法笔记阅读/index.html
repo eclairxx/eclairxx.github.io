@@ -16,14 +16,19 @@
   <meta name="author" content="">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="基本数据类型布尔型在c语言中必须添加stdbool.h头文件，c++中不需要；非零即true；用%d输出布尔型变量 符号常量#define pi 3.14 const 数据类型 变量名 &#x3D; 常量 const double pi &#x3D; 3.14 运算符条件运算符 （ ？ ：） A？B：C 即若A为真则返回B 若A为假则返回C 顺序结构输入输出使用scanf输入 scanf(&quot;%d&quot;">
+<meta property="og:type" content="article">
 <meta property="og:title" content="算法笔记阅读">
 <meta property="og:url" content="http://example.com/2023/01/12/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E9%98%85%E8%AF%BB/index.html">
 <meta property="og:site_name" content="YU&#39;s Blog">
+<meta property="og:description" content="基本数据类型布尔型在c语言中必须添加stdbool.h头文件，c++中不需要；非零即true；用%d输出布尔型变量 符号常量#define pi 3.14 const 数据类型 变量名 &#x3D; 常量 const double pi &#x3D; 3.14 运算符条件运算符 （ ？ ：） A？B：C 即若A为真则返回B 若A为假则返回C 顺序结构输入输出使用scanf输入 scanf(&quot;%d&quot;">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://trk607.bvimg.com/19485/9b7febb9b794f54c.png">
+<meta property="og:image" content="http://trk607.bvimg.com/19485/05763eac0f4a46fb.png">
 <meta property="article:published_time" content="2023-01-12T10:34:55.672Z">
-<meta property="article:modified_time" content="2023-01-12T12:17:14.726Z">
+<meta property="article:modified_time" content="2023-03-01T06:39:17.904Z">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://trk607.bvimg.com/19485/9b7febb9b794f54c.png">
   
   
   
@@ -216,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          3.4k words
         
       </span>
     
@@ -227,7 +232,7 @@
         
         
         
-          1 mins
+          29 mins
         
       </span>
     
@@ -270,7 +275,81 @@
             
               <div class="markdown-body">
                 
-                
+                <h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><p>布尔型在c语言中必须添加stdbool.h头文件，c++中不需要；非零即true；用%d输出布尔型变量</p>
+<h4 id="符号常量"><a href="#符号常量" class="headerlink" title="符号常量"></a>符号常量</h4><p><code>#define pi 3.14</code></p>
+<p>const 数据类型 变量名 = 常量</p>
+<p><code>const double pi = 3.14</code></p>
+<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><p>条件运算符 （ ？ ：）</p>
+<p>A？B：C 即若A为真则返回B 若A为假则返回C</p>
+<h3 id="顺序结构"><a href="#顺序结构" class="headerlink" title="顺序结构"></a>顺序结构</h3><h4 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h4><p>使用scanf输入</p>
+<p><code>scanf(&quot;%d&quot;,&amp;n);</code>n为变量名</p>
+<p><img src="http://trk607.bvimg.com/19485/9b7febb9b794f54c.png" srcset="/img/loading.gif" lazyload alt="photo01"></p>
+<p>输出时要是想输出%或\需要在前面再加一个%或\</p>
+<p>输出格式：%md可以使不足m位的int型变量以m位进行右对齐输出，其中高位用空格补齐，如果变量本身超过m位，则保持原样</p>
+<p>%0md和上面那个不同的是补位不用空格而用0</p>
+<p>%。mf可以让浮点数保留m位小数输出</p>
+<h6 id="对于字符串输入输出"><a href="#对于字符串输入输出" class="headerlink" title="对于字符串输入输出"></a>对于字符串输入输出</h6><p>使用getchar()输入单个字符，putchar()输出单个字符</p>
+<h4 id="typedef"><a href="#typedef" class="headerlink" title="typedef"></a>typedef</h4><p>给复杂数据类型起别名</p>
+<p><code>typedef long long LL;</code></p>
+<p>便于提高编码效率</p>
+<h4 id="常用math函数"><a href="#常用math函数" class="headerlink" title="常用math函数"></a>常用math函数</h4><p><code>fabs(double x)</code>对于double类型变量取绝对值</p>
+<p><code>floor(double x)和ceil(double x)</code>用于对double类型变量的向下取整和向上取整，返回类型位double</p>
+<p><code>pow(double r, double p)</code>用于返回<br>$$<br>r^p<br>$$<br><code>sqrt(double x)</code>用于返回double型变量的算术平方根</p>
+<p><code>log(double x)</code>用于返回double型变量的以自然对数为底的对数，c语言中没有对任意底数求对数的函数，需要使用换底公式来转换为以e为底数的对数</p>
+<p><code>sin(double x) cos(double x) tan(double x)</code></p>
+<p><code>round(double x)</code>用于将double型变量x四舍五入，返回类型也是double型，需要取整</p>
+<h3 id="选择结构"><a href="#选择结构" class="headerlink" title="选择结构"></a>选择结构</h3><h5 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h5><h5 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h5><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-keyword">switch</span>(表达式)&#123;<br>	<span class="hljs-keyword">case</span> 表达式<span class="hljs-number">1</span>:<br>		...<br>		<span class="hljs-keyword">break</span>;<br>	<span class="hljs-keyword">default</span>:<br>		...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如果没有break那么符合条件及之后的所有语句都会进行输出</p>
+<h4 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h4><h5 id="while语句"><a href="#while语句" class="headerlink" title="while语句"></a>while语句</h5><h5 id="do-while语句"><a href="#do-while语句" class="headerlink" title="do while语句"></a>do while语句</h5><h5 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h5><h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><h5 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h5><p>数组就是从某个地址开始连续若干个位置形成的元素集合</p>
+<h5 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">int</span> a[<span class="hljs-number">10</span>]=&#123;<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>&#125;;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">4</span>;i++)&#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;<span class="hljs-number">5</span>-i;j++)&#123;<br>            <span class="hljs-keyword">if</span>(a[j]&gt;a[j+<span class="hljs-number">1</span>])&#123;<br>                <span class="hljs-type">int</span> temp= a[j];<br>                a[j]=a[j+<span class="hljs-number">1</span>];<br>                a[j+<span class="hljs-number">1</span>]=temp;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=-;i&lt;<span class="hljs-number">5</span>;i++)&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,a[i]);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h5><h5 id="memset"><a href="#memset" class="headerlink" title="memset"></a>memset</h5><p>对数组中每一个元素赋以相同的值</p>
+<p><code>memset(数组名,值,sizeof(数组名))</code></p>
+<p>头文件需要string.h头文件，一般只用此对数组赋值0和-1，因为memset是按字节赋值，int型的四个bit会被赋值为同一个，而0的补码全0，-1的补码全为1，如果对数组赋其他数字，应使用fill函数，但memset函数的执行速度更快</p>
+<h5 id="字符数组"><a href="#字符数组" class="headerlink" title="字符数组"></a>字符数组</h5><h6 id="字符数组的初始化"><a href="#字符数组的初始化" class="headerlink" title="字符数组的初始化"></a>字符数组的初始化</h6><p>直接大括号内单引号单个初始化；也可以直接赋值字符串来初始化，双引号内赋值</p>
+<h6 id="字符数组的输入输出"><a href="#字符数组的输入输出" class="headerlink" title="字符数组的输入输出"></a>字符数组的输入输出</h6><p>输入类型有%s和%c c是单个字符的输入，可以识别空格和换行，s是字符串的输入，通过空格和换行识别字符串的结束，且用scanf输入时，后面对应的数组名不用加&amp;取地址符</p>
+<p>getchar和putchar分别用来输入和输出单个字符，<code>str[i][j]=getchar(); putchar(str[i][j])</code></p>
+<p>gets输入，puts输出，gets用来输入一行字符串，gets识别换行符\n作为输入结束，就是每次输入需要重启一行</p>
+<p>字符数组最后都有一个结束字符\0，所以字符数组要比字符的长度多1，int型不用加\0，且空字符与空格并不是一种东西；如果使用输入字符串数组并不是scanf和gets类型，则需要在输入的每个字符串后面加\0，否则输出无法识别</p>
+<h5 id="string-h头文件"><a href="#string-h头文件" class="headerlink" title="string.h头文件"></a>string.h头文件</h5><h6 id="strlen（）"><a href="#strlen（）" class="headerlink" title="strlen（）"></a>strlen（）</h6><p>可以得到字符数组第一个\0前的字符个数</p>
+<h6 id="strcmp"><a href="#strcmp" class="headerlink" title="strcmp()"></a>strcmp()</h6><p>返回两个字符串大小的比较结果<code>strcmp(字符数组1,字符数组2)</code>如果1小于2则返回负数，1大于2返回正数，相等为0</p>
+<h6 id="strcpy"><a href="#strcpy" class="headerlink" title="strcpy()"></a>strcpy()</h6><p><code>strcpy(字符数组1,字符数组2)</code>把第二个数组复制给数组1</p>
+<h6 id="strcat"><a href="#strcat" class="headerlink" title="strcat()"></a>strcat()</h6><p><code>strcat(字符数组1,字符数组2)</code>把数组2连接到数组1后面</p>
+<h5 id="sscanf-sprintf"><a href="#sscanf-sprintf" class="headerlink" title="sscanf  sprintf"></a>sscanf  sprintf</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-built_in">sscanf</span>(str,<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);<br><span class="hljs-built_in">sprintf</span>(str,<span class="hljs-string">&quot;%d&quot;</span>,n);<br></code></pre></td></tr></table></figure>
+
+<p>sscanf作用是把str中的内容以%d写入到n中，sprintf把n以%d 的格式写入到str字符数组，从右至左</p>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><h5 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h5><h4 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h4><h5 id="什么是指针"><a href="#什么是指针" class="headerlink" title="什么是指针"></a>什么是指针</h5><p>指针是一个unsigned类型的整数</p>
+<h6 id="指针变量"><a href="#指针变量" class="headerlink" title="指针变量"></a>指针变量</h6><p>指针变量用来存放指针，指针变量通过在某种数据类型后面加*来表示这是一个指针变量</p>
+<p>如果有好几个同种类型的指针变量都要同时定义，星号只会结合于第一个变量名，若需要每个变量都是指针变量，那么需要在后面的每个变量名之前都加上星号</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> a;<br><span class="hljs-type">int</span>* p=&amp;a;<br></code></pre></td></tr></table></figure>
+
+<p>int*是变量的类型，p是变量名，用于存储地址，因此地址&amp;a是赋值给p而不是 *p的</p>
+<p>如果定义了 int* p = &amp;a 那么指针变量p就存放了a的地址，可以通过p来获得变量a，*p就代表着获取了变量a的值</p>
+<p>对指针变量来说，把其存储的地址的类型称为基类型，如int* p的指针变量，int就是它的基类型。基类型必须和指针变量存储的地址类型相同，也就是说，上面定义的指针变量p不能够存放double型或char型数据的地址，而必须是int型数据的地址。</p>
+<h6 id="指针与数组"><a href="#指针与数组" class="headerlink" title="指针与数组"></a>指针与数组</h6><h6 id="使用指针变量作为函数参数"><a href="#使用指针变量作为函数参数" class="headerlink" title="使用指针变量作为函数参数"></a>使用指针变量作为函数参数</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">change</span><span class="hljs-params">(<span class="hljs-type">int</span>* p)</span>&#123;<br>    *p=<span class="hljs-number">233</span>;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">int</span> a=<span class="hljs-number">1</span>;<br>    <span class="hljs-type">int</span>* p=&amp;a;<br>    change(p);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h6 id="交换"><a href="#交换" class="headerlink" title="交换"></a>交换</h6><p>p68，需要对指针中内容进行交换，而不是地址的副本交换</p>
+<h5 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h5><h6 id="指针的引用"><a href="#指针的引用" class="headerlink" title="指针的引用"></a>指针的引用</h6><p>想要通过传入的地址来达到交换两个变量的效果，此处可以通过引用来实现</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-type">int</span>* &amp;a,<span class="hljs-type">int</span>* &amp;b)</span>&#123;<br>    <span class="hljs-type">int</span>* temp=a;<br>    a=b;<br>    b=temp;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这样做就相当于直接交换两个整型变量，因为a和b作为变量别名出现了</p>
+<p>注意的是，常量不可以使用引用，不可以写成swap(&amp;a,&amp;b),必须要用指针变量存放&amp;a，并且将指针变量作为参数传入</p>
+<h4 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Name</span>&#123;</span><br>    <span class="hljs-comment">//一些基本的数据结构或者自定义的数据类型</span><br>&#125;Alice,Bob,stu[<span class="hljs-number">100</span>];<br></code></pre></td></tr></table></figure>
+
+<h5 id="访问结构体内的元素"><a href="#访问结构体内的元素" class="headerlink" title="访问结构体内的元素"></a>访问结构体内的元素</h5><p>有两种方法，.和-&gt;</p>
+<p>可以写作stu.name ; (*p).id ; p-&gt;id</p>
+<h5 id="结构体的初始化"><a href="#结构体的初始化" class="headerlink" title="结构体的初始化"></a>结构体的初始化</h5><p>使用构造函数，构造函数不用写返回类型，而且函数名和结构体名相同</p>
+<p><img src="http://trk607.bvimg.com/19485/05763eac0f4a46fb.png" srcset="/img/loading.gif" lazyload alt="photo02"></p>
+<p>只要参数个数和类型不能完全相同，就可以定义任意多个构造函数，来适应多个不同的初始化场合</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">studentInfo</span>&#123;<br>    <span class="hljs-type">int</span> id;<br>    <span class="hljs-type">char</span> gender;<br>    <br>    <span class="hljs-built_in">studentInfo</span>()&#123;&#125; <span class="hljs-comment">//不初始化就定义结构体变量</span><br>    <span class="hljs-built_in">studentInfo</span>(<span class="hljs-type">int</span> _id): <span class="hljs-built_in">id</span>(_id)&#123;&#125;<br>    <span class="hljs-built_in">studentInfo</span>(<span class="hljs-type">int</span> _id,<span class="hljs-type">char</span> _gender):<span class="hljs-built_in">id</span>(_id),<span class="hljs-built_in">gender</span>(_gender)()<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><h5 id="cin与cout"><a href="#cin与cout" class="headerlink" title="cin与cout"></a>cin与cout</h5><p>需要添加头文件iostream和using namespace std才能使用</p>
+<p>如果想读入一整行，需要使用getline函数，cin.getline(str,100);把一整行都读入char型数组str中</p>
+<h5 id="浮点数的比较"><a href="#浮点数的比较" class="headerlink" title="浮点数的比较"></a>浮点数的比较</h5><p>eps取1e-8</p>
+<p><code>#define equ(a,b) ((fabs(a)-(b))&lt;(eps))</code></p>
+<p>如果差的绝对值小于eps，那么就认为两数相同</p>
+
                 
               </div>
             
