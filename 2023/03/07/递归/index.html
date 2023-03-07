@@ -16,21 +16,21 @@
   <meta name="author" content="">
   <meta name="keywords" content="">
   
-    <meta name="description" content="散列假设一个长度为n的数列，再给一个长度m的数列，问第二个数列中的数是否在第一个数列中出现过，或统计出现次数，可以用一个数组存储长度为n的数列，对应出现的数作为下标，数组内容统计数的出现次数-&gt;来降低时间复杂度 现在的问题为，若输入的数列很长，或者一个字符串，那么就不能直接设置为数组下标了，想要解决这个问题，就需要用到散列 散列：将元素通过一个函数转换为整数，使得该整数可以尽量唯一地代表这个">
+    <meta name="description" content="递归分治把问题划分为若干个子问题，分别解决之后合并得到原问题的解 递归反复调用自身函数，每次把问题规模缩小，直到范围缩小到可以直接得到边界数据的结果，然后再在返回路上求解 ①递归边界②递归调用 全排列问题给n个数，输出全排列 思路：考虑放到把数放到空中的这个思路，第一位选了某个数，那么这个数的hashtable对应位置设置为true，把对应P[index]数组也设置成这个数，index表示数的位置">
 <meta property="og:type" content="article">
-<meta property="og:title" content="散列">
-<meta property="og:url" content="http://example.com/2023/03/07/%E6%95%A3%E5%88%97/index.html">
+<meta property="og:title" content="递归">
+<meta property="og:url" content="http://example.com/2023/03/07/%E9%80%92%E5%BD%92/index.html">
 <meta property="og:site_name" content="YU&#39;s Blog">
-<meta property="og:description" content="散列假设一个长度为n的数列，再给一个长度m的数列，问第二个数列中的数是否在第一个数列中出现过，或统计出现次数，可以用一个数组存储长度为n的数列，对应出现的数作为下标，数组内容统计数的出现次数-&gt;来降低时间复杂度 现在的问题为，若输入的数列很长，或者一个字符串，那么就不能直接设置为数组下标了，想要解决这个问题，就需要用到散列 散列：将元素通过一个函数转换为整数，使得该整数可以尽量唯一地代表这个">
+<meta property="og:description" content="递归分治把问题划分为若干个子问题，分别解决之后合并得到原问题的解 递归反复调用自身函数，每次把问题规模缩小，直到范围缩小到可以直接得到边界数据的结果，然后再在返回路上求解 ①递归边界②递归调用 全排列问题给n个数，输出全排列 思路：考虑放到把数放到空中的这个思路，第一位选了某个数，那么这个数的hashtable对应位置设置为true，把对应P[index]数组也设置成这个数，index表示数的位置">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-03-07T01:14:27.000Z">
-<meta property="article:modified_time" content="2023-03-07T01:17:25.990Z">
+<meta property="article:published_time" content="2023-03-07T01:18:17.000Z">
+<meta property="article:modified_time" content="2023-03-07T06:47:35.438Z">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>散列 - YU&#39;s Blog</title>
+  <title>递归 - YU&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="散列"></span>
+            <span id="subtitle" data-typed-text="递归"></span>
           
         </div>
 
@@ -207,7 +207,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-07 09:14" pubdate>
+        <time datetime="2023-03-07 09:18" pubdate>
           March 7, 2023 am
         </time>
       </span>
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k words
+          1.4k words
         
       </span>
     
@@ -268,27 +268,22 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">散列</h1>
+            <h1 style="display: none">递归</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="散列"><a href="#散列" class="headerlink" title="散列"></a>散列</h2><p>假设一个长度为n的数列，再给一个长度m的数列，问第二个数列中的数是否在第一个数列中出现过，或统计出现次数，可以用一个数组存储长度为n的数列，对应出现的数作为下标，数组内容统计数的出现次数-&gt;<strong>来降低时间复杂度</strong></p>
-<p>现在的问题为，若输入的数列很长，或者一个字符串，那么就不能直接设置为数组下标了，想要解决这个问题，就需要用到<strong>散列</strong></p>
-<p><strong>散列：将元素通过一个函数转换为整数，使得该整数可以尽量唯一地代表这个元素</strong>H(key)=key</p>
-<p>除留余数法：H(key)=key%mod</p>
-<p>这种方法会产生冲突，为了解决冲突，有以下几种方法</p>
-<h5 id="线性探查法"><a href="#线性探查法" class="headerlink" title="线性探查法"></a>线性探查法</h5><p>得到H(key)已经被占用时，则检查H(key)+1是否被使用，如果使用就继续检查下一个，若超过表长，则回到首部继续</p>
-<h5 id="平方探查法"><a href="#平方探查法" class="headerlink" title="平方探查法"></a>平方探查法</h5><p>H(key)+1×1; H(key)-1×1;H(key)+2×2若超过表长，则把目标对表长取模；若目标小于0，则模表长再加表长再模表长</p>
-<h5 id="链地址法"><a href="#链地址法" class="headerlink" title="链地址法"></a>链地址法</h5><p>把所有目标相同的key连接成一条单链表，可以设定一个数组，每个元素中存放一条单链表。可以使用标准库中的map来直接使用hash的功能，unordered_map速度更快</p>
-<h3 id="字符串hash初步"><a href="#字符串hash初步" class="headerlink" title="字符串hash初步"></a>字符串hash初步</h3><p>如果key不是整数，假设key是二维整点，坐标为(x,y)其中0≤x,y≤Range，可以令H(P)=x*range+y来唯一的表示整点</p>
-<p>字符串转化也类似，若为A-Z，则把A-Z看作0-25，这样可以获得如下代码</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">hashFunc</span><span class="hljs-params">(<span class="hljs-type">char</span> S[],<span class="hljs-type">int</span> len)</span></span>&#123;<br>    <span class="hljs-type">int</span> id=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;len;i++)&#123;<br>        id=id*<span class="hljs-number">26</span>+(s[i]=<span class="hljs-string">&#x27;A&#x27;</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> id;<br>&#125;<span class="hljs-comment">//len不能太长</span><br></code></pre></td></tr></table></figure>
+                <h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><h4 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h4><p>把问题划分为若干个子问题，分别解决之后合并得到原问题的解</p>
+<h4 id="递归-1"><a href="#递归-1" class="headerlink" title="递归"></a>递归</h4><p>反复调用自身函数，每次把问题规模缩小，直到范围缩小到可以直接得到边界数据的结果，然后再在返回路上求解</p>
+<p>①递归边界②递归调用</p>
+<h4 id="全排列问题"><a href="#全排列问题" class="headerlink" title="全排列问题"></a>全排列问题</h4><p>给n个数，输出全排列</p>
+<p>思路：考虑放到把数放到空中的这个思路，第一位选了某个数，那么这个数的hashtable对应位置设置为true，把对应P[index]数组也设置成这个数，index表示数的位置。继续递归调用求下一个位置填入什么数，记得要在之后把该数的hashtable设置为false，以便于到同级别的下一个数继续递归时方便使用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> maxn = <span class="hljs-number">10</span>;<br><span class="hljs-type">int</span> n, P[maxn], hashTable[maxn] = &#123;<span class="hljs-literal">false</span>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">generateP</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(index==n+<span class="hljs-number">1</span>)&#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n;i++)&#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, P[i]);<br>        &#125;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> x = <span class="hljs-number">1</span>; x &lt;= n;x++)&#123;<br>        <span class="hljs-keyword">if</span>(hashTable[x]==<span class="hljs-literal">false</span>)&#123;<br>            P[index] = x;<br>            hashTable[x] = <span class="hljs-literal">true</span>;<br>            <span class="hljs-built_in">generateP</span>(index + <span class="hljs-number">1</span>);<br>            hashTable[x] = <span class="hljs-literal">false</span>;<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    n = <span class="hljs-number">3</span>;<br>    <span class="hljs-built_in">generateP</span>(<span class="hljs-number">1</span>);<br>    <span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;pause&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
-
-<p>N个字符串三位大写字母组成，M个查询字符串，问每个M在N个字符串中出现的次数</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> maxn=<span class="hljs-number">100</span>;<br><span class="hljs-type">char</span> S[maxn][<span class="hljs-number">5</span>],temp[<span class="hljs-number">5</span>];<br><span class="hljs-type">int</span> hashtable[<span class="hljs-number">26</span> * <span class="hljs-number">26</span> * <span class="hljs-number">26</span>+<span class="hljs-number">10</span>];<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">hashFunc</span><span class="hljs-params">(<span class="hljs-type">char</span> S[],<span class="hljs-type">int</span> len)</span></span>&#123;<br>    <span class="hljs-type">int</span> id=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; len;i++)&#123;<br>        id = id * <span class="hljs-number">26</span> + (S[i] - <span class="hljs-string">&#x27;A&#x27;</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> id;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> n, m;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n;i++)&#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>, S[i]);<br>        <span class="hljs-type">int</span> id = <span class="hljs-built_in">hashFunc</span>(S[i], <span class="hljs-number">3</span>);<br>        hashtable[id]++;<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; m;i++)&#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>, temp);<br>        <span class="hljs-type">int</span> id = <span class="hljs-built_in">hashFunc</span>(temp, <span class="hljs-number">3</span>);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, hashtable[id]);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="n皇后问题"><a href="#n皇后问题" class="headerlink" title="n皇后问题"></a>n皇后问题</h4><p>如果采用组合数来枚举，枚举数过多，会无法承受。所以考虑写出n列皇后对应的行数，再考虑放置是否合法即可（与上面全排列相同，总共需要n的阶乘次枚举）可以考虑在全排列的基础上求解</p>
+<p>由于全排列枚举，所以肯定不在同一行或者列，即要考虑是否在同一条对角线上，<strong>遍历每2个皇后（暴力</strong>，判断是否在同一条对角线上，若不是，则累计计数变量count</p>
+<p>优化：如果判断出前面一部分皇后放置后，剩下的皇后怎样都不可能合法，那么就不用继续计算下去了，可以直接返回上一层：<strong>回溯</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">generateP</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(index==n+<span class="hljs-number">1</span>)&#123;<br>        count++;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> x = <span class="hljs-number">1</span>; x &lt;= n;x++)&#123;<br>        <span class="hljs-keyword">if</span>(hashTable[x]==<span class="hljs-literal">false</span>)&#123;<br>            <span class="hljs-type">bool</span> flag = <span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> pre = <span class="hljs-number">1</span>; pre &lt; index;pre++)&#123;<br>                <span class="hljs-keyword">if</span>(<span class="hljs-built_in">abs</span>(x-P[pre])==<span class="hljs-built_in">abs</span>(pre-index))&#123;<br>                    flag = <span class="hljs-literal">false</span>;<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">if</span>(flag)&#123;<br>                P[index] = x;<br>                hashTable[x] = <span class="hljs-literal">true</span>;<br>                <span class="hljs-built_in">generateP</span>(index + <span class="hljs-number">1</span>);<br>                hashTable[x] = <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
                 
@@ -316,18 +311,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/07/%E9%80%92%E5%BD%92/" title="递归">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">递归</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/12/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E9%98%85%E8%AF%BB/" title="算法笔记阅读">
-                        <span class="hidden-mobile">算法笔记阅读</span>
+                      <a href="/2023/03/07/%E6%95%A3%E5%88%97/" title="散列">
+                        <span class="hidden-mobile">散列</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
