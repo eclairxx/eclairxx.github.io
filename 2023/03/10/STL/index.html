@@ -24,7 +24,7 @@
 <meta property="og:description" content="C++标准模板库介绍STLvector向量，也是变长数组，该数组的长度会根据需要自动改变；vector还会用邻接表的方式存储图，这对于无法使用邻接矩阵（结点数太多），又不想使用邻接表的读者非常友好。 需要使用vector时，要添加 #include&lt;vector&gt; using namespace std; vector的定义vector &lt;typename&gt; name; 其">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-03-10T02:26:18.000Z">
-<meta property="article:modified_time" content="2023-03-11T02:54:28.840Z">
+<meta property="article:modified_time" content="2023-03-11T08:25:43.877Z">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k words
+          6.3k words
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          20 mins
+          53 mins
         
       </span>
     
@@ -333,6 +333,89 @@
 <h5 id="substr（）"><a href="#substr（）" class="headerlink" title="substr（）"></a>substr（）</h5><p>substr(pos,len)返回从pos号位置开始，长度为len的子串</p>
 <h5 id="string-npos"><a href="#string-npos" class="headerlink" title="string::npos"></a>string::npos</h5><p>用于作为find函数失配时的返回值，本身是一个常数，为-1或者4294967295</p>
 <h5 id="find-1"><a href="#find-1" class="headerlink" title="find()"></a>find()</h5><p>str.find(str2)当str2时str的子串时，返回其在str中第一次出现的位置，如果不是str的子串，则返回string::npos</p>
+<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><p>map翻译为映射，一般数组的映射，都是从int型映射到其他，而map可以将任何基本类型映射到任何基本类型里</p>
+<p><code>#include&lt;map&gt;</code></p>
+<p><code>using namespace std;</code></p>
+<h4 id="map的定义"><a href="#map的定义" class="headerlink" title="map的定义"></a>map的定义</h4><p><code>map&lt;typename1,typename2&gt; mp;</code>第一个是键的类型，第二个是值的类型</p>
+<h4 id="map容器内元素的访问"><a href="#map容器内元素的访问" class="headerlink" title="map容器内元素的访问"></a>map容器内元素的访问</h4><h5 id="通过访问下表访问"><a href="#通过访问下表访问" class="headerlink" title="通过访问下表访问"></a>通过访问下表访问</h5><p>对于一个定义为map&lt;char,int&gt;mp的map来说，可以直接使用mp[‘c’]的方式来访问它对应的整数，<strong>map中键是唯一的</strong></p>
+<h5 id="通过迭代器访问-1"><a href="#通过迭代器访问-1" class="headerlink" title="通过迭代器访问"></a>通过迭代器访问</h5><p><code>map&lt;typename1,typename2&gt;::iterator it;</code></p>
+<p><strong>map可以使用it-&gt;first来访问键it-&gt;second来访问值</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++">map&lt;<span class="hljs-type">char</span>,<span class="hljs-type">int</span>&gt; mp;<br>mp[<span class="hljs-string">&#x27;m&#x27;</span>]=<span class="hljs-number">20</span>;<br>mp[<span class="hljs-string">&#x27;r&#x27;</span>]=<span class="hljs-number">30</span>;<br>mp[<span class="hljs-string">&#x27;a&#x27;</span>]=<span class="hljs-number">40</span>;<br><span class="hljs-keyword">for</span>(map&lt;<span class="hljs-type">char</span>,<span class="hljs-type">int</span>&gt;::iterator it=mp.<span class="hljs-built_in">begin</span>();it!=mp.<span class="hljs-built_in">end</span>();it++)&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c %d&quot;</span>,it-&gt;first,it-&gt;second);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>map会按键从小到大的顺序自动排序</strong></p>
+<h4 id="map常用函数"><a href="#map常用函数" class="headerlink" title="map常用函数"></a>map常用函数</h4><h5 id="find-2"><a href="#find-2" class="headerlink" title="find()"></a>find()</h5><p>find(key)返回值为key的映射的<strong>迭代器</strong></p>
+<h5 id="erase-3"><a href="#erase-3" class="headerlink" title="erase()"></a>erase()</h5><p>mp.erase(it) it为迭代器</p>
+<p>mp.erase(key)</p>
+<p>mp.erase(first,last)都是迭代器，也是左闭右开</p>
+<h5 id="size-2"><a href="#size-2" class="headerlink" title="size()"></a>size()</h5><p>用来获得map中映射的对数</p>
+<h5 id="clear-3"><a href="#clear-3" class="headerlink" title="clear()"></a>clear()</h5><p>用来清空map中的所有元素</p>
+<h4 id="map的常见用途"><a href="#map的常见用途" class="headerlink" title="map的常见用途"></a>map的常见用途</h4><p>需要建立字符串与整数之间映射的题目；判断大整数或其他类型数据是否存在的题目，可以把map当bool数组用；字符串和字符串之间的映射；</p>
+<p>map的键和值是唯一的，如果需要一个键对应多个值，就需要用multimap</p>
+<p>还有unordered_map来处理只映射补排序的要求，速度比map要快得多</p>
+<h2 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h2><h4 id="queue的定义"><a href="#queue的定义" class="headerlink" title="queue的定义"></a>queue的定义</h4><p>队列，先进先出</p>
+<p><code>#include&lt;queue&gt;</code></p>
+<p><code>using namespace std;</code></p>
+<p><code>queue&lt;typename&gt; name</code></p>
+<h4 id="元素的访问"><a href="#元素的访问" class="headerlink" title="元素的访问"></a>元素的访问</h4><p>只能通过front()来访问队首元素 back()来访问队尾元素</p>
+<h4 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h4><h5 id="push"><a href="#push" class="headerlink" title="push()"></a>push()</h5><p>push(x)将x入队</p>
+<h5 id="pop"><a href="#pop" class="headerlink" title="pop()"></a>pop()</h5><p>令队首元素出队</p>
+<h5 id="front-back"><a href="#front-back" class="headerlink" title="front() back()"></a>front() back()</h5><p>获得队首元素和队尾元素</p>
+<h5 id="empty"><a href="#empty" class="headerlink" title="empty()"></a>empty()</h5><p>检测队列queue是否为空，返回true则空</p>
+<h5 id="size-3"><a href="#size-3" class="headerlink" title="size()"></a>size()</h5><p>返回queue中元素的个数</p>
+<h4 id="queue的常见用途"><a href="#queue的常见用途" class="headerlink" title="queue的常见用途"></a>queue的常见用途</h4><p>实现广度优先搜索时，不用自己手动实现一个队列，而是用queue作为代替，提高程序的准确性</p>
+<p>使用front() back()函数前，需要先用empty()判断是否为空，可能出现因为空而错误</p>
+<h2 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h2><p>优先队列，底层是用堆来进行实现的，<strong>队首元素一定是当前队列中优先级最高的那一个</strong></p>
+<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p><code>priority_queue&lt;typename&gt; name;</code></p>
+<h4 id="元素的访问-1"><a href="#元素的访问-1" class="headerlink" title="元素的访问"></a>元素的访问</h4><p>只能通过top()函数访问队首元素</p>
+<h4 id="priority-queue常用函数"><a href="#priority-queue常用函数" class="headerlink" title="priority_queue常用函数"></a>priority_queue常用函数</h4><p>push() pop() top()empty() size()</p>
+<h4 id="队内优先级的设置"><a href="#队内优先级的设置" class="headerlink" title="队内优先级的设置"></a>队内优先级的设置</h4><h5 id="基本数据类型的优先级设置"><a href="#基本数据类型的优先级设置" class="headerlink" title="基本数据类型的优先级设置"></a>基本数据类型的优先级设置</h5><p>一般都是从大到小，下面两种定义是等价的</p>
+<p><code>priority_queue&lt;int&gt; q;</code></p>
+<p><code>priority_queue&lt;int,vector&lt;int&gt;,less&lt;int&gt;&gt; q;</code></p>
+<p>其中第二个参数填写的是来承载底层数据结构的容器，如果第一个参数是double或char型，则此处只需要填写vector<double>,第三个参数是对第一个参数的比较类</p>
+<p>less<int>表示数字大的优先级大  greater<int>表示数字小的优先级大</p>
+<h5 id="结构体的优先级设置"><a href="#结构体的优先级设置" class="headerlink" title="结构体的优先级设置"></a>结构体的优先级设置</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">fruit</span>&#123;<br>    string name;<br>    <span class="hljs-type">int</span> price;<br>    <span class="hljs-keyword">friend</span> <span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span> &lt; (fruit f1,fruit f2)&#123;<br>        <span class="hljs-keyword">return</span> f1.price&lt;f2.price;<br>    &#125;<br>&#125;<br>priority_queue&lt;fruit&gt; q;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">fruit</span>&#123;<br>    string name;<br>    <span class="hljs-type">int</span> price;<br>&#125;f1,f2,f3;<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">cmp</span>&#123;<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(fruit f1,fruit f2)</span></span>&#123;<br>        <span class="hljs-keyword">return</span> f1.price&gt;f2.price;<br>    &#125;<br>&#125;;<br>priority_queue&lt;fruit,vector&lt;fruit&gt;,cmp&gt; q;<br></code></pre></td></tr></table></figure>
+
+<p>如果结构体内数据庞大，最好使用引用来提高效率</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">friend</span> <span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span> &lt; (<span class="hljs-type">const</span> fruit &amp;f1,<span class="hljs-type">const</span> fruit &amp;f2)&#123;<br>    <span class="hljs-keyword">return</span> f1.price&gt;f2.price;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-type">const</span> fruit &amp;f1,<span class="hljs-type">const</span> fruit &amp;f2)</span></span>&#123;<br>    <span class="hljs-keyword">return</span> f1.price&gt;f2.price;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h2><h4 id="stack的定义"><a href="#stack的定义" class="headerlink" title="stack的定义"></a>stack的定义</h4><p><code>stack &lt;typename&gt; name;</code></p>
+<h4 id="元素访问"><a href="#元素访问" class="headerlink" title="元素访问"></a>元素访问</h4><p>栈是先进后出的数据结构，STL中的stack只能通过top()来进行访问栈顶元素</p>
+<h4 id="常用函数-1"><a href="#常用函数-1" class="headerlink" title="常用函数"></a>常用函数</h4><h5 id="push-top-pop-empty-size"><a href="#push-top-pop-empty-size" class="headerlink" title="push() top() pop() empty() size()"></a>push() top() pop() empty() size()</h5><h2 id="pair"><a href="#pair" class="headerlink" title="pair"></a>pair</h2><blockquote>
+<p>想要将两个元素一起作为一个合成元素，又不想定义结构体，就可以用pair</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">pair</span>&#123;<br>	typeName1 first;<br>    typeName2 second;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p><code>#include&lt;utility&gt;</code></p>
+<p><code>pair&lt;typename1,typename2&gt; p;</code></p>
+<p>初始化<code>pair&lt;string,int&gt; p(&quot;h&quot;,5);</code></p>
+<p>​            <code>make_pair(&quot;h&quot;,5);</code></p>
+<p>访问元素是只有first和second 按照正常结构体的方式访问就可以</p>
+<h4 id="pair常用函数"><a href="#pair常用函数" class="headerlink" title="pair常用函数"></a>pair常用函数</h4><p>可以直接用比较符来比较，比较规则是以first的大小作为标准，只有first相同时才判断second的大小</p>
+<h4 id="常见用途"><a href="#常见用途" class="headerlink" title="常见用途"></a>常见用途</h4><p>代替二元结构体和构造函数</p>
+<p>作为map的键值进行插入</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">map&lt;string,<span class="hljs-type">int</span>&gt; mp;<br>mp.<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">make_pair</span>(<span class="hljs-string">&quot;h&quot;</span>,<span class="hljs-number">5</span>));<br></code></pre></td></tr></table></figure>
+
+<h2 id="algorithm头文件下的常用函数"><a href="#algorithm头文件下的常用函数" class="headerlink" title="algorithm头文件下的常用函数"></a>algorithm头文件下的常用函数</h2><h3 id="max-min-abs"><a href="#max-min-abs" class="headerlink" title="max() min() abs()"></a>max() min() abs()</h3><p>返回最大最小值以及绝对值，abs(x)返回x的绝对值，x必须为整数，浮点型的绝对值需要使用math头文件下的fabs</p>
+<h3 id="swap"><a href="#swap" class="headerlink" title="swap()"></a>swap()</h3><p>交换xy的值</p>
+<h3 id="reverse"><a href="#reverse" class="headerlink" title="reverse()"></a>reverse()</h3><p>reverse(it,it2)可以将数组指针在[it,it2)之间的元素或容器的迭代器进行反转</p>
+<h3 id="next-permutation"><a href="#next-permutation" class="headerlink" title="next_permutation()"></a>next_permutation()</h3><p>给出一个序列在全排列中的下一个序列</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> a[<span class="hljs-number">10</span>]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>&#125;;<br><span class="hljs-keyword">do</span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d%d%d&quot;</span>,a[<span class="hljs-number">0</span>],a[<span class="hljs-number">1</span>],a[<span class="hljs-number">2</span>]);<br>&#125;<span class="hljs-keyword">while</span>(<span class="hljs-built_in">next_permutation</span>(a,a+<span class="hljs-number">3</span>));<br></code></pre></td></tr></table></figure>
+
+<h3 id="fill"><a href="#fill" class="headerlink" title="fill()"></a>fill()</h3><p>把数组或容器中的某一段区间赋为某个相同的值，与memset不同，memset(str,c,n)这里的赋值可以是数组类型对应范围中的任意值fill(a,a+5,233)</p>
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><p><code>sort(首元素地址（必填），尾元素地址的下一个地址（必填），比较函数（非必填）)</code></p>
+<h4 id="如何使用sort排序"><a href="#如何使用sort排序" class="headerlink" title="如何使用sort排序"></a>如何使用sort排序</h4><p>必须加上头文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-built_in">sort</span>(首元素地址(必填),尾元素地址的下一个地址(必填),比较函数(非必填));<br></code></pre></td></tr></table></figure>
+
+<p>如果不写比较函数，则默认递增</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> a[<span class="hljs-number">6</span>]=&#123;<span class="hljs-number">9</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">-1</span>&#125;;<br>    <span class="hljs-built_in">sort</span>(a, &amp;a[<span class="hljs-number">6</span>]);<span class="hljs-comment">//sort(a,a+6);</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">6</span>;i++)<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, a[i]);<br>    <span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;pause&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-comment">//sort函数的第三个参数为compare函数，可以人为定义cmp函数，比如结构体之内的排序，可以通过自定义cmp函数实现</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="cmp函数的编写"><a href="#cmp函数的编写" class="headerlink" title="cmp函数的编写"></a>cmp函数的编写</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//例为成绩的排序</span><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(Student a,Student b)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(a.score!=b.score)<span class="hljs-keyword">return</span> a.score&gt;b.score;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-built_in">strcmp</span>(a.name,b.name)&lt;<span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="容器的排序"><a href="#容器的排序" class="headerlink" title="容器的排序"></a>容器的排序</h4><p>只有vector string deque可以使用sort</p>
+<h3 id="lower-bound-upper-bound"><a href="#lower-bound-upper-bound" class="headerlink" title="lower_bound() upper_bound()"></a>lower_bound() upper_bound()</h3><p>lower_bound(first,last,val)来寻找在数组或容器中的[first,last)范围内第一个值<strong>大于等于</strong>val元素的位置，如果是数组，则返回该位置的指针，如果是容器，则返回该位置的迭代器</p>
+<p>upper_bound(first,last,val)用来寻找在数组或容器中的[first,last)范围内第一个值<strong>大于</strong>val元素的位置，如果是数组，则返回该位置的指针，如果是容器，则返回该位置的迭代器</p>
 
                 
               </div>
